@@ -16,3 +16,9 @@ end
 get '/about' do
 	erb :about
 end
+
+
+get '/selection' do
+
+	erb :selection	
+end
