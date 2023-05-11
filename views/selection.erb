@@ -1,1 +1,21 @@
 <h2>Pizza selection</h2>
+
+<% @product.each do |p| %>
+	<p>	
+		<span style="font-size: 120%; color: #999">Pizza name:<%=p.title %></span>
+		<br />
+		Discription:<%=p.discription %>
+		<br />
+		Price:<%=p.price %>
+		<br />
+		Pizza size:<%=p.size %>
+		<br />
+		Is spicy?:<%=p.is_spicy %>
+		<br />
+		Is veg?:<%=p.is_veg %>
+		<br />
+		Is Best offer?:<%=p.is_best_offer %>
+		<br />
+		Pizza image:<%=p.path_to_image %>
+	</p>
+<% end %>

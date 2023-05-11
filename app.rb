@@ -19,6 +19,12 @@ end
 
 
 get '/selection' do
-
+	@product=Product.all
 	erb :selection	
 end
+
+
+# post '/selection' do
+# 	@selection=Product.new  params[:pizza]
+# 	erb :selection
+# end
