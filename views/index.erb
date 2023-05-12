@@ -3,7 +3,35 @@
 <div class= "row">
 	<% @product.each do |p| %>
 		<div class="col-md-3">
-			<%=p.title %>
+			<div>
+				<%=p.title %>
+			</div>
+
+			<div>
+				<%=p.discription %>
+			</div>
+
+			<div>
+				<%=p.price %>
+			</div>
+
+			<div>
+				<%=p.is_spicy %>
+			</div>
+
+			<div>
+				<%=p.is_veg %>
+			</div>
+
+			<div>
+				<%=p.is_best_offer %>
+			</div>
+
+			<div>
+				<img src="<%= p.path_to_image %>" />
+			</div>
+			
+			
 		</div>
 		
 	<% end %>
