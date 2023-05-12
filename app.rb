@@ -10,21 +10,10 @@ class Product < ActiveRecord::Base
 end
 
 get '/' do
+	@product=Product.all
 	erb :index 			
 end
 
 get '/about' do
 	erb :about
 end
-
-
-get '/selection' do
-	@product=Product.all
-	erb :selection	
-end
-
-
-# post '/selection' do
-# 	@selection=Product.new  params[:pizza]
-# 	erb :selection
-# end
