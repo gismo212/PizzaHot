@@ -93,6 +93,32 @@ function foo() {
   alert(x);
 } использование local storage
 
+Интерфейс Storage из Web Storage API предоставляет доступ для session
+storage или local storage для конкретного домена, позволяя вам к 
+примеру добавлять,
+изменять или удалять сохранённые элементы данных.
+
+Свойства
+Storage.length Только для чтения
+Возвращает число, представляющее количество элементов в объекте Storage.
+
+Методы
+Storage.key()
+Приняв число n, метод вернёт имя n-ного ключа в Storage
+
+Storage.getItem()
+Приняв имя ключа, метод вернёт для него значение.
+
+Storage.setItem()
+Приняв имя ключа и значение, метод добавит этот ключ в Storage или обновит его значение, если ключ уже существовал.
+
+Storage.removeItem()
+Приняв имя ключа, метод удалит этот ключ из Storage
+
+Storage.clear()
+При вызове метод удалит все ключи из Storage.
+
+
 
 
 
@@ -106,6 +132,9 @@ function foo() {
 
   alert(x);
 }
+
+
+
 
 
         типы данных в sql
@@ -226,8 +255,43 @@ a ||= bпримерно переводится какa || a = b
  Это различие не имеет значения, если aи bявляются локальными переменными, но имеет значение,
  если любой из них является методом получения/установки класса.
 
+x ||= y
+Это сокращённо:
 
+x = x || y
+Что означает:
 
+x || y
+|| - логическое ИЛИ
+
+if x == 1 || x == 2
+Срабатывает первое условие, если не срабатывает, берёт второе условие:
+
+nil || 4 #=> 4
+false || 2 #=> 2
+123 || 2 #=> 123
+
+x = x || 4
+x = false
+x = x || 2
+puts x
+#=> 2
+
+x = true
+x = x || 2
+puts x
+#=> true
+
+x = 5
+x = x || 2 # это мы можем заменить на x ||= 2
+puts x
+#=> 5
+
+x = 5
+x ||= 2
+puts x
+#=> 5
+x ||= y используется для установки значения по умолчанию
 
 Что такое self? self всегда указывает на текущий объект. Может быть вызван без создания объекта.
 class WhatIsSelf
@@ -270,6 +334,17 @@ end
  #=> But what about me?
  #=> I'm a block, but could it be???
  #=> #<Proc:0x00089d64> #<Proc:0x00089c74> #<Proc:0x00089b34>
+
+
+grid 
+условно разделяет страницу на 12 частей
+
+md-midle for ipad
+sm-small for phone
+lg-large for pc
+
+сol-md-2 обозначает столбец будет занимать длинну 4 едениц
+
 
 
 
@@ -368,6 +443,86 @@ function add_to_cart(id)
 html файл
 
 <div>
-				<button class="btn  btn-success "onclick="add_to_cart(<%=p.id%>)">Add to cart</button>
+				<button class="btn  btn-success "onclick="add_to_cart(<%=p.id%>)">Add to cart</button>  #задаем параметр
 			</div>
  
+
+
+Структура данных для нашей корзины заказа в PizzaShop - хеш:
+key - id продукта
+value - количество
+Перед написанием на js напишем на ruby:
+
+order = {}
+
+loop do
+  print 'Введите id продукта: '
+  id_product = gets.strip
+
+  print "Сколько штук вы хотите заказать: "
+  amount_now = gets.strip.to_i
+
+  amount = order[id_product].to_i
+  amount += amount_now
+
+  order[id_product] = amount
+
+  puts order.inspect
+end
+
+
+
+На сервер мы будем передавать строку.
+
+1 = 5, 2 = 12, 3 = 0
+
+
+
+Теперь напишем это на JS:
+
+function add_to_cart(id)
+{
+	var x = window.localStorage.getItem('product'+ id)  # вывод будет следующим product 1,product 2
+	x = x * 1 + 1;  операция означает что переменная будет увеличиватся на еденицу с каждым нажатием
+	window.localStorage.setItem('product_'+id ,x) id продукта key,добавление в хэш значения x  value
+}
+}
+
+
+как проверить наличие элементов в local storage  f 12 в браузере для открытия консоли и прописать команду localstorage
+localStorage.clear(); данная команда удалит из него все данные
+ ( Свойство localStorage позволяет получить доступ к Storage объекту -хранилище данных)
+в отличие от session storage (хранит данные в течении одного сеанса)  local storage хранит данные перманентно (размер хранилища 5 мб)
+
+
+function add_to_cart(id)
+{
+	var key='product_'+ id; добавляем key в отдельную переменную 
+
+	var x = window.localStorage.getItem(key);
+	x = x * 1 + 1;
+	window.localStorage.setItem('product_' + id, x);
+}	
+	
+
+
+Итак, если вы хотите правильно перечислить элементы с ключом, соответствующим шаблону, используйте
+
+function listFavs(){
+    var key;
+    for (var i = 0, len = localStorage.length; i < len; i++){
+        key = localStorage.key(i);
+        if ((/^saved-fav-title_/).test(key)) {
+            console.log(localStorage.getItem(key);
+        }
+   }
+}
+
+
+Кратко о том, что делает функция:
+
+Создает переменную key, которая будет использоваться для хранения ключа текущего элемента Local Storage.
+Проходится по всем элементам Local Storage, используя цикл for.
+Для каждого элемента вызывает метод localStorage.key(i), который возвращает ключ текущего элемента.
+Проверяет, начинается ли ключ с "saved-fav-title_" с помощью регулярного выражения (/^saved-fav-title_/).
+Если ключ соответствует условию, то выводит значение элемента Local Storage с помощью метода localStorage.getItem(key).
