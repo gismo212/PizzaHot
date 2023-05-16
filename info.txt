@@ -526,3 +526,37 @@ function listFavs(){
 Для каждого элемента вызывает метод localStorage.key(i), который возвращает ключ текущего элемента.
 Проверяет, начинается ли ключ с "saved-fav-title_" с помощью регулярного выражения (/^saved-fav-title_/).
 Если ключ соответствует условию, то выводит значение элемента Local Storage с помощью метода localStorage.getItem(key).
+
+
+
+// + to public/js/main.js
+
+function cart_get_number_of_items()
+{
+  var cnt = 0;
+
+  for (var i = 0; i < window.localStorage.length; i++)
+  {
+    var key = window.localStorage.key(i); // получаем ключ
+    var value = window.localStorage.getItem(key); // получаем значение
+
+    if(key.indexOf('product_') == 0)
+    {
+      cnt = cnt + value * 1;
+    }
+  }
+
+  return cnt;
+}
+
+for-цикл
+
+for(var i=;)- var i=0 аналог each
+
+var key = window.localStorage.key(i) получим название ключа
+var value = window.localStorage.getItem(key) -получим значение
+
+key.indexOf('product_')-возвращает номер позиции с которого начинается выражение
+key.indexOf('product_')==0 -проверка true false
+
+if (key.indexOf('product_') == 0) on js
