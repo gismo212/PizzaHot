@@ -560,3 +560,23 @@ key.indexOf('product_')-возвращает номер позиции с которого начинается выражение
 key.indexOf('product_')==0 -проверка true false
 
 if (key.indexOf('product_') == 0) on js
+
+
+
+
+teg <a>- anchor (якорь) ссылка
+
+
+
+3 способа написания button 
+
+
+<a class="btn...
+<button class="btn..
+<input type="submit"
+
+
+создание кнопки для корзины в layut
+<ul class="nav navbar-nav navbar-right">
+			    	<li><input type="submit" class="btn btn-primary btn-lg " value="Cart(.. )"></li>
+			    </ul>

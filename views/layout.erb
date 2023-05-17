@@ -39,8 +39,12 @@
 			      <li><a href="/selection">Pizza selection</a></li>
 			      <li><a href="/contacts">Contacts</a></li>
 			    </ul>
- 					<ul>
-			    	<li><a href="#">Cart(..)<li>
+ 				<ul class="nav navbar-nav navbar-right">
+			    	<li>
+			    		<form action="/cart" method="post">
+			    		<input name="orders" type="text" />
+			    		<input type="submit" class="btn btn-primary btn-lg " value="Cart(.. )">
+			    	</form> </li>
 			    </ul>
 			  </div><!--/.nav-collapse -->
 			</nav>
