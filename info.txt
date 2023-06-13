@@ -235,8 +235,8 @@ puts object.method(:object_id).call
 
 a ||= b является условным оператором присваивания . Это значит:
 
-если a не определено или ложно , то оцените b и установите aрезультат.
-В противном случае (если aопределено и оценивается как истинное), то b не оценивается, и присваивание не происходит.
+если a не определено или ложно , то оцените b и установите a результат.
+В противном случае (если a определено и оценивается как истинное), то b не оценивается, и присваивание не происходит.
 Например:
 
 a ||= nil # => nil
@@ -248,10 +248,10 @@ foo ||= true # => true
 foo ||= false # => true
 Как ни странно, он похож на другие операторы присваивания (такие как +=), но ведет себя иначе.
 
-a += bпереводится какa = a + b
-a ||= bпримерно переводится какa || a = b
+a += b переводится как a = a + b
+a ||= b примерно переводится как a || a = b
 Это почти сокращение от a || a = b. Разница в том, что когда aне определено,
- a || a = bбудет повышаться NameError, тогда как a ||= bустанавливается aв b.
+ a || a = b будет повышаться NameError, тогда как a ||= b устанавливается a в b.
  Это различие не имеет значения, если aи bявляются локальными переменными, но имеет значение,
  если любой из них является методом получения/установки класса.
 
@@ -344,8 +344,6 @@ sm-small for phone
 lg-large for pc
 
 сol-md-2 обозначает столбец будет занимать длинну 4 едениц
-
-
 
 
 вывод содержимого бд
@@ -578,5 +576,217 @@ teg <a>- anchor (якорь) ссылка
 
 создание кнопки для корзины в layut
 <ul class="nav navbar-nav navbar-right">
-			    	<li><input type="submit" class="btn btn-primary btn-lg " value="Cart(.. )"></li>
-			    </ul>
+	<li><input type="submit" class="btn btn-primary btn-lg " value="Cart(.. )"></li>
+</ul>
+
+<ul> 	class="class="nav navbar-nav navbar-right">"
+   <li>
+	<form action="/cart" method="post">   #добовляем форму
+	<input name="orders" type="text" value   # добовляем поле куда будем записывать кол-во пицц
+	<input type="submit" class="btn btn-primary btn-lg " value="Cart(.. )">
+   </li>
+</ul>
+
+
+ создаем функцию в js файле 
+function cart_get_orders()
+{
+  var orders = '' ; задаем переменрную в которую будем складывать все значения
+
+  for (var i = 0; i < window.localStorage.length; i++)
+  {
+    var key = window.localStorage.key(i); 
+    var value = window.localStorage.getItem(key); 
+
+    if(key.indexOf('product_') == 0)
+    {
+      orders = orders + key + '=' + value + ','; # таким образом в ордерс помещаем все key and value значени
+    }
+  }
+
+  return orders;
+}
+
+далее создаем функцию
+function update_orders_input()
+{
+	var orders = cart_get_orders();
+	$('#orders_input').val(orders);  #val(orders) установка значения
+}
+
+<input id="orders_input" name="orders" type="text" value   # для того что бы обратится из java скрипта задаем атрибут  id 
+
+
+
+function add_to_cart(id)
+{
+	var key='product_'+ id; 
+
+	var x = window.localStorage.getItem(key);
+	x = x * 1 + 1;
+	window.localStorage.setItem(key, x);
+
+	update_orders_input(); # добовляем название функции для взаимодействия  
+   
+}
+
+
+<ul>    class="class="nav navbar-nav navbar-right">"
+   <li>
+        <form action="/cart" method="post">   #
+        <input name="orders" type="hidden" /> заменяем type="text" на type="hidden" - делая текст скрытым
+        <input type="submit" class="btn btn-primary btn-lg " value="Cart(.. )">
+   </li>
+</ul>
+
+
+<ul>    class="class="nav navbar-nav navbar-right">"
+   <li>
+        <form action="/cart" method="post">   #
+        <input name="orders" type="hidden" /> заменяем type="text" на type="hidden" - делая текст скрытым
+        <input id="orders_button" type="submit" class="btn btn-primary btn-lg " value="Cart(.. )">    #добавляем id
+   </li>
+</ul>
+
+
+value="Cart(.. )">  в скобках будет кол-во itemov в корзине 
+
+создаем функциюю
+function update_orders_button()
+{
+  var text = 'Cart (' + cart_get_number_of_items() + ')';
+  $('#orders_button'). val(text);  
+}
+
+
+function add_to_cart(id)
+{
+        var key='product_'+ id; 
+
+        var x = window.localStorage.getItem(key);
+        x = x * 1 + 1;
+        window.localStorage.setItem(key, x);
+
+        update_orders_input(); 
+  update_orders_button();                 и добовляем в функцию
+   
+}
+
+
+
+
+
+Чтобы установить конкретную версию, введите (вместо rails_version - номер версии):
+
+gem install rails -v rails_version
+
+
+С помощью gemset-ов можно использовать вместе разные версии Rails и Ruby. Это делается с помощью команды gem.
+
+rvm gemset create gemset_name # create a gemset
+rvm ruby_version@gemset_name  # specify Ruby version and our new gemset
+
+Gemset-ы позволяют создавать полнофункциональные окружения для gem-ов,
+ а также настраивать 
+неограниченное количество окружений для каждой версии Ruby.
+
+rails приложение может запускатся в разном окружении
+
+Rails-приложение может запускаться в 3 типах окружения:
+development- не будет доп не нужных вещей,работает быстро и оптимизирует работу
+test   -будет вместо обычной базы данных тестовая база данных
+production
+
+при разработке приложения на rails ,настройки rails позволяют оптимизировать среду таким образом
+что бы было удобно разрабатывать программы
+
+Создадим новое рейлс-приложение:
+rails new blog
+
+
+rails server запус сервера rails
+
+start rals server запуск сервера рэйлс в новом окне
+
+ MVC
+Model, View, Controller
+
+Controller - отвечает за работу с какой-либо сущностью
+
+Создадим контроллер:
+rails generate controller home index
+Найдём файл /app/controllers/home_controller.rb
+
+Найдём файл /app/views/home/index.html.erb
+
+Откроем в браузере: http://localhost:3000/home/index
+
+Обычно /home/index создаётся для главной страницы сайта Надо открыть /config/routes.rb и прописать:
+
+Rails.application.routes.draw do
+  get '/' => 'home#index'
+end
+ 
+
+
+
+
+Что такое юнит-тесты. Юнит-тесты предназначены для тестирования отдельных модулей программы (к частям, которые не делимы).
+require "test/unit"
+
+class Brokened
+  def uh_oh
+    "I needs fixing"
+  end
+end
+
+class BrokenedTest < Test::Unit::TestCase
+  def test_uh_oh
+    actual = Brokened.new
+    assert_equal("I'm all better!", actual.uh_oh)
+  end
+end
+ #=> Started
+ #=> F
+ #=> Finished in 0.663831 seconds.
+ #=>
+ #=>   1) Failure:
+ #=> test_uh_oh:11
+ #=> <"I'm all better!"> expected but was
+ #=> <"I needs fixing">.
+ #=>
+ #=> 1 tests, 1 assertions, 1 failures, 0 errors
+Вызываем метод и проверяем, что результат совпадает с эталоном
+
+test coverage - покрытие тестами
+
+Интеграционное тестирование - тестирование сайта в браузере
+
+Как много надо покрывать кода тестами?
+
+Юнит тестирование нужно, чтобы при возрастании сложности приложения функциональность большого приложения сохранялась.
+
+Статическая и динамическая типизация
+// Java
+public boolean isEmpty(String s) {
+  return s.length() == 0;
+}
+# ruby
+def empty?(s)
+  return s.size == 0
+end
+В руби меньше кода и он более гибкий.
+
+
+	переносим инициализацию продуктов из корзины  в layaut (что бы код был доступен во всех программе)
+ <script type="text/javascript">
+	$(function() {
+		update_orders_input();
+		update_orders_button(); 
+  
+	});
+</script> 
+
+
+
+
