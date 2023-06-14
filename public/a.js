@@ -74,3 +74,8 @@ function cart_get_orders()
 
   return orders;
 }
+
+  function order_is_ready() {
+    alert("Заказ принят!!!");
+  }
+
