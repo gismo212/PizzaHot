@@ -789,4 +789,37 @@ end
 
 
 
+HTTP запросы:
 
+GET /cart?...&...
+POST
+PUT
+DELETE
+GET, POST можно отправлять с помощью form
+
+PUT, DELETE через POST с добавлением скрытой переменной.
+
+
+Паттерн REST - передача состояния объекта
+
+В REST существует 7 различных методов с помощью которых можно управлять объектами:
+
+index
+show
+new
+create
+edit
+update
+destroy
+
+
+
+REST product:
+
+index - /products - все наши продукты - get
+show - /products/1 - конкретный продукт - get
+new - /products/new - вывод формы для создания - get
+create - /products - создание продукта, обращ. к params и в БД создаёт запись - post
+edit - /products/1/edit - возвращает форму для редактирования определённого продукта - get
+update - /products/1 - put
+destroy - /produts/1 - delete
