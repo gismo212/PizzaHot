@@ -851,3 +851,7 @@ $(function() {
 
 
 </script>
+
+
+
+alert('aaa');return false # возврат false или отмена действия
