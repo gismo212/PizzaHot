@@ -823,3 +823,31 @@ create - /products - создание продукта, обращ. к params и в БД создаёт запись - 
 edit - /products/1/edit - возвращает форму для редактирования определённого продукта - get
 update - /products/1 - put
 destroy - /produts/1 - delete
+
+
+
+
+при использовании метода new нужно сделать 213.save
+
+при использовании метода create нет
+
+
+Очистим корзину после того как заказ был отправлен и добавим кнопку очистки корзины.
+
+# + post '/cart'
+
+# если корзина пустая
+if @items.length == 0
+  return erb "В корзине нет товаров"
+end
+
+# view
+<script type="text/javascript">
+	
+$(function() {
+	window.localStorage.clear();
+
+});
+
+
+</script>
