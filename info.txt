@@ -855,3 +855,21 @@ $(function() {
 
 
 alert('aaa');return false # возврат false или отмена действия
+
+
+
+js
+
+выводим сообщение после очистки
+function cancel_order()
+{
+
+  window.localStorage.clear();
+    update_orders_input();
+    update_orders_button();
+
+    $('#cart').text('You cart is now empty');    # обращаемся через id cart к коду и заменяем его на текст $-jqury
+
+    return false;
+}
+
