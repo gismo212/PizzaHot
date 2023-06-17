@@ -34,7 +34,7 @@ post '/cart' do
 
 
 	# выводим сообщение о том что корзина пуста
-	if @items.lenght == 0
+	if @items.length == 0
 		return erb :cart_is_empty
 	end
 

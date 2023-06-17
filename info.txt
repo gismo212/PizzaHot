@@ -873,3 +873,17 @@ function cancel_order()
     return false;
 }
 
+
+подключение стилей
+                  в layoute
+<link href="/app.css" rel="stylesheet">
+
+
+#orders_button
+{
+	background-color: #F8F8F8;   # изменение цвета
+	border: none;                # удаление границ
+	font-size: 22px;             # размер
+	padding-top:5px ;            # отступ сверху
+	text-decoration: underline;  # подчеркиваем текст
+}
